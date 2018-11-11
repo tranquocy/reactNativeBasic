@@ -1,47 +1,38 @@
 import React, { Component } from 'react'
-import { AppRegistry, FlatList, View, StyleSheet, Text } from 'react-native';
+import { AppRegistry, FlatList, View, StyleSheet } from 'react-native';
 import mockData from '../data/mockData';
-
-class FlatListItem extends Component {
-  render() {
-    return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: this.props.index % 2 == 0 ? '#eb4947' : '#ff000'
-        }}
-      >
-        <Text>{this.props.item.name}</Text>
-        <Text>{this.props.item.desc}</Text>
-      </View>
-    )
-  }
-}
+import FlatListItem from './FlatListItem';
 
 export default class FlatListBasic extends Component {
+  constructor(props) {
+    super(props);
+    this.state = ({
+      deletedRowKey: null,
+    });
+  }
+
+  refreshFlatList = (deletedKey) => {
+    this.setState((prevState) => {
+      return {
+        deletedRowKey: deletedKey,
+      }
+    })
+  }
+
   render() {
     return (
       <View style={styles.viewStyle}>
         <FlatList
-          data={
-            [
-              {
-                key: 'a',
-                name: "Nokia",
-                desc: 'This is a Nokia'
-              },
-              {
-                key: 'b',
-                name: "iPhone",
-                desc: 'This is a iPhone'
-              }
-            ]
-          }
-          renderItem={({item}) => {
+          data={mockData}
+          renderItem={({item, index}) => {
+            console.log(item);
             return (
-              <FlatListItem item={item}>
-              
-              </FlatListItem>
+              <FlatListItem
+                item={item}
+                index={index}
+                data={mockData}
+                parentFlatList={this.refreshFlatList}
+              />
             )
           }}
         />
@@ -53,14 +44,7 @@ export default class FlatListBasic extends Component {
 const styles = StyleSheet.create({
   viewStyle: {
     flex: 1,
-    height: 500,
     justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonStyle: {
-    color: '#fff',
-    alignItems: 'center',
-    backgroundColor: '#eee',
-    padding: 10
+    padding: 20
   },
 });
