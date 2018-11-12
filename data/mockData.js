@@ -1,7 +1,7 @@
 const mockData = [
   {
     key: 'a',
-    name: "Nokia",
+    name: "Nokia A",
     imgSrc: 'https://i.redd.it/ai411e0uktp11.png',
     desc: 'This is a Nokia'
   },

@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
-import { AppRegistry, FlatList, View, StyleSheet } from 'react-native';
+import { 
+  AppRegistry,
+  FlatList,
+  View,
+  StyleSheet,
+  Platform
+} from 'react-native';
 import mockData from '../data/mockData';
 import FlatListItem from './FlatListItem';
+import FlatListView from './FlatListView';
 
 export default class FlatListBasic extends Component {
   constructor(props) {
@@ -19,13 +26,19 @@ export default class FlatListBasic extends Component {
     })
   }
 
+  _onPressAdd = () => {
+    alert('Add Item');
+  }
+
   render() {
     return (
       <View style={styles.viewStyle}>
+        <FlatListView
+          onPressAdd={this._onPressAdd}
+        />
         <FlatList
           data={mockData}
           renderItem={({item, index}) => {
-            console.log(item);
             return (
               <FlatListItem
                 item={item}
@@ -45,6 +58,6 @@ const styles = StyleSheet.create({
   viewStyle: {
     flex: 1,
     justifyContent: 'center',
-    padding: 20
+    marginTop: Platform.OS === 'ios' ? 40 : 0
   },
 });
