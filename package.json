@@ -7,8 +7,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "random-string": "^0.2.0",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.4",
+    "react-native-button": "^2.3.0",
+    "react-native-modalbox": "^1.6.0",
     "react-native-swipeout": "^2.3.6"
   },
   "devDependencies": {

@@ -9,6 +9,7 @@ import {
 import mockData from '../data/mockData';
 import FlatListItem from './FlatListItem';
 import FlatListView from './FlatListView';
+import AddModal from './AddModal';
 
 export default class FlatListBasic extends Component {
   constructor(props) {
@@ -23,11 +24,12 @@ export default class FlatListBasic extends Component {
       return {
         deletedRowKey: deletedKey,
       }
-    })
+    });
+    this.refs.flatList.scrollToEnd();
   }
 
   _onPressAdd = () => {
-    alert('Add Item');
+    this.refs.addModal.showAddModal();
   }
 
   render() {
@@ -37,6 +39,7 @@ export default class FlatListBasic extends Component {
           onPressAdd={this._onPressAdd}
         />
         <FlatList
+          ref={'flatList'}
           data={mockData}
           renderItem={({item, index}) => {
             return (
@@ -49,6 +52,7 @@ export default class FlatListBasic extends Component {
             )
           }}
         />
+        <AddModal ref={'addModal'} parentFlatList={this.refreshFlatList} />
       </View>
     )
   }

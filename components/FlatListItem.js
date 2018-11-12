@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, Alert  } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Alert
+} from 'react-native';
 import Swipeout from 'react-native-swipeout';
 
 class FlatListItem extends Component {
