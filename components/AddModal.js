@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  FlatList,
   StyleSheet,
   Text,
-  View,
-  Image,
-  Alert,
   Platform,
-  TouchableHighlight,
   Dimensions,
   TextInput
 } from 'react-native';
@@ -40,6 +34,23 @@ export default class AddModal extends Component {
 
   generateKey = (numberOfCharacter) => {
     return require('random-string')({length: numberOfCharacter});
+  }
+
+  addItem = () => {
+    if(this.state.nameItem == 0 && this.state.descItem == 0) {
+      alert('You should enter name & desc');
+      return;
+    }
+    const newKey = this.generateKey(24);
+    const newIem = {
+      key: newKey,
+      name: this.state.nameItem,
+      imgSrc: 'https://i.redd.it/ai411e0uktp11.png',
+      desc: this.state.descItem
+    }
+    mockData.push(newIem);
+    this.props.parentFlatList(newKey);
+    this.refs.myModal.close();
   }
  
   render() {
@@ -80,22 +91,7 @@ export default class AddModal extends Component {
         />
         <Button
           style={styles.buttonStyle}
-          onPress={() => {
-            if(this.state.nameItem == 0 && this.state.descItem == 0) {
-              alert('You should enter name & desc');
-              return;
-            }
-            const newKey = this.generateKey(24);
-            const newIem = {
-              key: newKey,
-              name: this.state.nameItem,
-              imgSrc: 'https://i.redd.it/ai411e0uktp11.png',
-              desc: this.state.descItem
-            }
-            mockData.push(newIem);
-            this.props.parentFlatList(newKey);
-            this.refs.myModal.close();
-          }}
+          onPress={this.addItem}
         >
           Save
         </Button>
