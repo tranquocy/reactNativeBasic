@@ -14,25 +14,10 @@ import {
   Dimensions,
   TextInput
 } from 'react-native';
-import mockData from '../../data/mockData';
+import horizontalFlatListData from '../../data/horizontalFlatListData';
 import HorizontalFlatListItem from './HorizontalFlatListItem';
 
 class HorizontalFlatList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = ({
-      deletedRowKey: null,
-    });
-  }
-
-  refreshFlatList = (deletedKey) => {
-    this.setState((prevState) => {
-      return {
-        deletedRowKey: deletedKey,
-      }
-    });
-    this.refs.flatList.scrollToEnd();
-  }
   render() {
     return (
       <View style={styles.rootViewStyle}>
@@ -40,18 +25,17 @@ class HorizontalFlatList extends Component {
           <FlatList
             style={{backgroundColor: '#000', opacity: 0.5}}
             horizontal={true}
-            data={mockData}
+            data={horizontalFlatListData}
             renderItem={({item, index}) => {
               return (
                 <HorizontalFlatListItem
                   item={item}
                   index={index}
-                  parentFlatList={this.refreshFlatList}
+                  parentFlatList={this}
                 />
               )
             }}
           >
-
           </FlatList>
         </View>
       </View>

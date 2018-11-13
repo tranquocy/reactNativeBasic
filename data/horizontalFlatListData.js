@@ -15,7 +15,8 @@ const horizontalStatus = {
     ios: 'ios-sunny',
     android: 'md-sunny'
   }
-}
+};
+
 const horizontalFlatListData = [
   {
     key: 'a',
@@ -32,14 +33,14 @@ const horizontalFlatListData = [
   {
     key: 'c',
     hour: '3:00 AM',
-    status: horizontalStatus.cloud,
-    degrees: 57,
+    status: horizontalStatus.sunny,
+    degrees: 55,
   },
   {
     key: 'd',
     hour: '4:00 AM',
-    status: horizontalStatus.sunny,
-    degrees: 60,
+    status: horizontalStatus.rainy,
+    degrees: 50,
   },
   {
     key: 'e',
@@ -50,22 +51,9 @@ const horizontalFlatListData = [
   {
     key: 'f',
     hour: '6:00 AM',
-    status: horizontalStatus.rainy,
-    degrees: 59,
-  },
-  ,
-  {
-    key: 'g',
-    hour: '7:00 AM',
-    status: horizontalStatus.thunderstorm,
-    degrees: 57,
-  },
-  {
-    key: 'h',
-    hour: '8:00 AM',
-    status: horizontalStatus.rainy,
-    degrees: 58,
-  },
+    status: horizontalStatus.sunny,
+    degrees: 55,
+  }
 ];
 
-module.exports = horizontalFlatListData, horizontalStatus;
+module.exports = horizontalFlatListData;

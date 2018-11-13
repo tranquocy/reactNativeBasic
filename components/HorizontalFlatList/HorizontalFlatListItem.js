@@ -14,6 +14,7 @@ import {
   Dimensions,
   TextInput
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class HorizontalFlatListItem extends Component {
   render() {
@@ -21,7 +22,11 @@ class HorizontalFlatListItem extends Component {
     return (
       <View style={styles.viewStyle}>
         <Text style={styles.textStyle}>
-          {item.name}
+          {item.hour}
+        </Text>
+        <Icon name="facebook"></Icon>
+        <Text style={styles.textStyle}>
+          {item.degrees} &#8451;
         </Text>
       </View>
     );
