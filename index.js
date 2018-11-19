@@ -6,4 +6,4 @@ import FlatListBasic from './components/FlatListBasic';
 import HorizontalFlatList from './components/HorizontalFlatList/HorizontalFlatList';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => HorizontalFlatList);
+AppRegistry.registerComponent(appName, () => FlatListBasic);

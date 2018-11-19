@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { 
+import {
   AppRegistry,
   FlatList,
   View,
   StyleSheet,
   Platform
 } from 'react-native';
-import mockData from '../data/mockData';
+import getItemFromServer from '../API/mockAPI';
 import FlatListItem from './FlatListItem';
 import FlatListView from './FlatListView';
 import AddModal from './AddModal';
@@ -16,7 +16,20 @@ export default class FlatListBasic extends Component {
     super(props);
     this.state = ({
       deletedRowKey: null,
+      itemsFromServer: []
     });
+  }
+
+  componentDidMount() {
+    this.refreshDataFromServer();
+  }
+
+  refreshDataFromServer = () => {
+    getItemFromServer().then((items) => {
+      this.setState({itemsFromServer: items})
+    }).catch((error) => {
+      this.setState({itemsFromServer: []})
+    })
   }
 
   refreshFlatList = (deletedKey) => {
@@ -33,6 +46,7 @@ export default class FlatListBasic extends Component {
   }
 
   render() {
+    console.log(this.state.itemsFromServer);
     return (
       <View style={styles.viewStyle}>
         <FlatListView
@@ -40,13 +54,13 @@ export default class FlatListBasic extends Component {
         />
         <FlatList
           ref={'flatList'}
-          data={mockData}
+          data={this.state.itemsFromServer}
           renderItem={({item, index}) => {
             return (
               <FlatListItem
                 item={item}
                 index={index}
-                data={mockData}
+                data={this.state.itemsFromServer}
                 parentFlatList={this.refreshFlatList}
               />
             )
