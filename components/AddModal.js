@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modalbox';
 import Button from 'react-native-button';
-import mockData from '../data/mockData';
+import {insertNewItemToServer} from '../API/mockAPI';
 
 var screen = Dimensions.get('window');
 
@@ -45,14 +45,14 @@ export default class AddModal extends Component {
     const newIem = {
       key: newKey,
       name: this.state.nameItem,
-      imgSrc: 'https://i.redd.it/ai411e0uktp11.png',
       desc: this.state.descItem
     }
-    mockData.push(newIem);
-    this.props.parentFlatList(newKey);
+    insertNewItemToServer(newIem).then(() => {
+      this.props.parentFlatList.refreshDataFromServer();
+    });
     this.refs.myModal.close();
   }
- 
+
   render() {
     return (
       <Modal

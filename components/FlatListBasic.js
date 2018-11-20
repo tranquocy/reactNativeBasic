@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Platform
 } from 'react-native';
-import getItemFromServer from '../API/mockAPI';
+import {getItemFromServer} from '../API/mockAPI';
 import FlatListItem from './FlatListItem';
 import FlatListView from './FlatListView';
 import AddModal from './AddModal';
@@ -66,7 +66,7 @@ export default class FlatListBasic extends Component {
             )
           }}
         />
-        <AddModal ref={'addModal'} parentFlatList={this.refreshFlatList} />
+        <AddModal ref={'addModal'} parentFlatList={this} />
       </View>
     )
   }
