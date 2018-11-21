@@ -12,7 +12,8 @@ class FlatListItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeRowKey: null
+      activeRowKey: null,
+      item: {}
     }
   }
 
@@ -36,6 +37,13 @@ class FlatListItem extends Component {
       right: [
         {
           onPress: () => {
+            parentFlatList.refs.editModal.showEditModal(data[index], this);
+          },
+          text: 'Edit',
+          type: 'primary'
+        },
+        {
+          onPress: () => {
             const deletingRow = this.state.activeRowKey;
             Alert.alert(
               'Alert',
@@ -49,7 +57,7 @@ class FlatListItem extends Component {
                   onPress: () => {
                     data.splice(index, 1);
                     // Refresh FlatList
-                    parentFlatList(deletingRow)
+                    parentFlatList.refreshFlatList(deletingRow)
                   }
                 }
               ],
