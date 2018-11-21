@@ -10,6 +10,7 @@ import {getItemFromServer} from '../API/mockAPI';
 import FlatListItem from './FlatListItem';
 import FlatListView from './FlatListView';
 import AddModal from './AddModal';
+import EditModal from './EditModal';
 
 export default class FlatListBasic extends Component {
   constructor(props) {
@@ -61,12 +62,13 @@ export default class FlatListBasic extends Component {
                 item={item}
                 index={index}
                 data={this.state.itemsFromServer}
-                parentFlatList={this.refreshFlatList}
+                parentFlatList={this}
               />
             )
           }}
         />
         <AddModal ref={'addModal'} parentFlatList={this} />
+        <EditModal ref={'editModal'} parentFlatList={this} />
       </View>
     )
   }

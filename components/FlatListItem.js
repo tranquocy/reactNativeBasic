@@ -37,8 +37,7 @@ class FlatListItem extends Component {
       right: [
         {
           onPress: () => {
-            let selectedItem = this.state.item.name ? this.state.item : item;
-            parentFlatList.refs.editModal.showEditModal(selectedItem, this);
+            parentFlatList.refs.editModal.showEditModal(data[index], this);
           },
           text: 'Edit',
           type: 'primary'
@@ -58,7 +57,7 @@ class FlatListItem extends Component {
                   onPress: () => {
                     data.splice(index, 1);
                     // Refresh FlatList
-                    parentFlatList(deletingRow)
+                    parentFlatList.refreshFlatList(deletingRow)
                   }
                 }
               ],
