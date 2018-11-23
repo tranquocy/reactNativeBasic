@@ -17,6 +17,12 @@ class FlatListItem extends Component {
     }
   }
 
+  refreshFlatListItem = (changedItem) => {
+    this.setState({
+      item: changedItem
+    })
+  }
+
   render() {
     const {item, data, index, parentFlatList} = this.props;
 
@@ -29,6 +35,7 @@ class FlatListItem extends Component {
           })
         }
       },
+
       onOpen: (secID, rowID, direction) => {
         this.setState({
           activeRowKey: item.key
@@ -37,7 +44,8 @@ class FlatListItem extends Component {
       right: [
         {
           onPress: () => {
-            parentFlatList.refs.editModal.showEditModal(data[index], this);
+            let selectedItem = this.state.item.name ? this.state.item : this.props.item;
+            parentFlatList.refs.editModal.showEditModal(selectedItem, this);
           },
           text: 'Edit',
           type: 'primary'
@@ -102,8 +110,8 @@ class FlatListItem extends Component {
                 justifyContent: 'center',
               }}
             >
-              <Text style={styles.colorTextStyle}>{item.name}</Text>
-              <Text style={styles.colorTextStyle}>{item.desc}</Text>
+              <Text style={styles.colorTextStyle}>{this.state.item.name ? this.state.item.name : item.name}</Text>
+              <Text style={styles.colorTextStyle}>{this.state.item.desc ? this.state.item.desc : item.desc}</Text>
             </View>
           </View>
           <View

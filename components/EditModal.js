@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modalbox';
 import Button from 'react-native-button';
-import mockData from '../data/mockData';
+import {updateData} from '../API/mockAPI';
 
 var screen = Dimensions.get('window');
 
@@ -14,32 +14,40 @@ export default class EditModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nameItem: '',
+      name: '',
       desc: ''
     };
   }
 
   updateItem = () => {
-    if (this.state.nameItem.length == 0 || this.state.desc.length == 0) {
+    if (this.state.name.length == 0 || this.state.desc.length == 0) {
       alert("You must enter item's name and description");
       return;
     }
-   //Update existing Item
-   var foundIndex = mockData.findIndex(item => this.state.key == item.key);
-   if (foundIndex < 0) {
-    return; //not found
-   }
-   mockData[foundIndex].name = this.state.nameItem;
-   mockData[foundIndex].desc = this.state.desc;
+    //Update existing Item
+    let params = {
+      item_id: this.state.key,
+      name: this.state.name,
+      desc: this.state.desc
+    }
+    updateData(params).then(() => {
+      this.state.flatlistItem.refreshFlatListItem({
+        id: this.state.item_id,
+        name: this.state.name,
+        desc: this.state.desc,
+      });
+      this.refs.myModal.close();
+    }).catch((error) => {
+      console.log(error);
+      this.refs.myModal.close();
+    })
    //Refresh flatlist item
-   this.state.flatlistItem.refreshFlatListItem();
-   this.refs.myModal.close();
   }
 
   showEditModal = (editingItem, flatlistItem) => {
     this.setState({
       key: editingItem.key,
-      nameItem: editingItem.name,
+      name: editingItem.name,
       desc: editingItem.desc,
       flatlistItem: flatlistItem
     });
@@ -62,9 +70,9 @@ export default class EditModal extends Component {
         <Text style={styles.textStyle}>Item's information</Text>
         <TextInput
           style={styles.inputStyle}
-          onChangeText={(text) => this.setState({ nameItem: text })}
+          onChangeText={(text) => this.setState({ name: text })}
           placeholder="Enter item's name"
-          value={this.state.nameItem}
+          value={this.state.name}
         />
         <TextInput
           style={styles.inputStyle}
